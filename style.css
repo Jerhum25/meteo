@@ -55,3 +55,11 @@
 .infosMeteo .vent {
   font-size: 22px;
 }
+
+
+@media screen and (max-width:500px){
+.container{
+    max-height: 100svh;
+    /* display: none; */
+}
+}
