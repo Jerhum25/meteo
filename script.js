@@ -178,7 +178,7 @@ function getVille(e) {
                     picto.innerHTML = `<img src="./img/thunder.png" alt="" />`;
                     break;
                 }
-      
+      changerVilleInput.setAttribute("focus", "none")
           });
       });
   }
