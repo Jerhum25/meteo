@@ -1,6 +1,13 @@
 const infosMeteo = document.querySelector(".infosMeteo");
 let changerVilleInput = document.querySelector("input");
 changerVilleInput.addEventListener("change", getVille);
+
+function degConvert(degres) {
+  const directions = ["N", "N-E", "E", "S-E", "S", "S-O", "O", "N-O"];
+  const index = Math.round((degres % 360) / 45);
+  return directions[index % 8];
+}
+
 navigator.geolocation.getCurrentPosition(success, error);
 
 function success(e) {
@@ -16,10 +23,14 @@ function success(e) {
       )
         .then((reponse3) => reponse3.json())
         .then((data3) => {
+          console.log(data3);
+          const degresVent = data3.current.wind_direction_10m;
+          const directionVent = degConvert(degresVent);
+
           console.log(data3.current.weather_code);
           infosMeteo.innerHTML = `
             <h2>${data4.features[0].properties.city}</h2>
-            <h3 class="temperature">${data3.current.temperature_2m} ${
+            <h3 class="temperature">${data3.current.temperature_2m}${
             data3.current_units.temperature_2m
           }  <span>${Math.min(...data3.daily.temperature_2m_min)}${
             data3.current_units.temperature_2m
@@ -29,7 +40,7 @@ function success(e) {
             <div class="picto"></div>
             <p class="vent">💨 ${data3.current.wind_speed_10m} ${
             data3.current_units.wind_speed_10m
-          }</p>
+          } 🧭 ${directionVent}</p>
             <p class="precipitations">💧 ${data3.current.precipitation} ${
             data3.current_units.precipitation
           }</p>
@@ -84,15 +95,14 @@ function success(e) {
     });
 }
 function error(e) {
-  const modal = document.querySelector(".errorVille")
-  const container = document.querySelector(".container")
-  modal.classList.add("active")
-  container.classList.add("filterBlur")
-  setTimeout(() => { 
-    modal.classList.remove("active")
-    container.classList.remove("filterBlur")
-   }, 2000)
-  
+  const modal = document.querySelector(".errorVille");
+  const container = document.querySelector(".container");
+  modal.classList.add("active");
+  container.classList.add("filterBlur");
+  setTimeout(() => {
+    modal.classList.remove("active");
+    container.classList.remove("filterBlur");
+  }, 2000);
 }
 
 function getVille(e) {
@@ -113,13 +123,16 @@ function getVille(e) {
           )
             .then((reponse2) => reponse2.json())
             .then((data2) => {
-              console.log(data2.current.weather_code);
+              const degresVent = data2.current.wind_direction_10m;
+              const directionVent = degConvert(degresVent);
+    
+              console.log(data2.current.wind_direction_10m);
               const tMax = Math.max(...data2.daily.temperature_2m_max);
               infosMeteo.innerHTML = `
                   <h2>${data.results[0].name}, <span>${
                 data.results[0].country
               }</span></h2>
-                  <h3 class="temperature">${data2.current.temperature_2m} ${
+                  <h3 class="temperature">${data2.current.temperature_2m}${
                 data2.current_units.temperature_2m
               }  <span>${Math.min(...data2.daily.temperature_2m_min)}${
                 data2.current_units.temperature_2m
@@ -130,7 +143,7 @@ function getVille(e) {
   
                   <p class="vent">💨 ${data2.current.wind_speed_10m} ${
                 data2.current_units.wind_speed_10m
-              }</p>
+              } 🧭 ${directionVent}</p>
                   <p class="precipitations">💧 ${data2.current.precipitation} ${
                 data2.current_units.precipitation
               }</p>
