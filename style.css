@@ -8,15 +8,13 @@
 .container {
   width: 100%;
   height: 100vh;
-  /* margin: 100px auto; */
-  /* border: 1px solid #111; */
   padding: 20px;
-  /* border-radius: 15px; */
-  background-image: url("./img/roberto-corrado-mancino-zAIfSOT9dIQ-unsplash.jpg");
+  background-image: url("./img/fond.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   position: relative;
+  /* color: #fff; */
 }
 .container input {
   position: absolute;
@@ -28,17 +26,17 @@
   border: 1px solid #111;
   cursor: pointer;
   outline: none;
+  /* color: #fff; */
 }
-.container .infosMeteo{
-    margin-top: 5vh;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-  
+.container .infosMeteo {
+  margin-top: 5vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 .infosMeteo h2 {
   margin-top: 50px;
-  /* text-transform: uppercase; */
+  text-align: center;
 }
 .infosMeteo h3 {
   display: flex;
@@ -46,20 +44,32 @@
   justify-content: center;
   flex-direction: column;
   font-size: 50px;
-  margin-bottom: 40vh;
+  /* margin-bottom: 20vh; */
 }
 .infosMeteo h3 span {
   font-size: 18px;
 }
+.infosMeteo .picto{
+  width: 150px;
+
+}
+.infosMeteo .picto img{
+  width: 100%;
+}
+
 .infosMeteo .precipitations,
 .infosMeteo .vent {
   font-size: 22px;
 }
 
-
-@media screen and (max-width:500px){
-.container{
+@media screen and (max-width: 500px) {
+  .container {
     max-height: 100svh;
-    /* display: none; */
+  }
 }
+
+@media screen and (max-height: 500px) {
+  .infosMeteo h3 {
+    margin-bottom: 20vh;
+  }
 }
