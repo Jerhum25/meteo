@@ -14,6 +14,10 @@
   background-repeat: no-repeat;
   background-position: center;
   position: relative;
+  transition: filter 0.5s ease-in-out;
+}
+.filterBlur {
+  filter: blur(5px);
 }
 .container input {
   position: absolute;
@@ -47,17 +51,35 @@
 .infosMeteo h3 span {
   font-size: 18px;
 }
-.infosMeteo .picto{
+.infosMeteo .picto {
   width: 150px;
-
 }
-.infosMeteo .picto img{
+.infosMeteo .picto img {
   width: 100%;
 }
 
 .infosMeteo .precipitations,
 .infosMeteo .vent {
   font-size: 22px;
+}
+
+.errorVille {
+  width: max-content;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 25px;
+  padding: 30px;
+  justify-self: center;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+  color: crimson;
+  opacity: 0;
+  transition: opacity .5s ease-in-out;
+}
+.active {
+  opacity: 1;
 }
 
 @media screen and (max-width: 500px) {
