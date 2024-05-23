@@ -90,6 +90,10 @@
   display: flex;
   justify-content: center;
   gap: 5px;
+  overflow-x: auto;
+}
+.hourlyMeteo::-webkit-scrollbar {
+  display: none;
 }
 .hourlyMeteo .hourly {
   width: 60px;
@@ -109,7 +113,7 @@
 @media screen and (max-width: 875px) {
   .hourlyMeteo {
     width: 100%;
-    overflow-x: scroll;
+    /* overflow-x: scroll; */
     justify-content: start;
   }
 
