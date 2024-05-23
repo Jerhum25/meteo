@@ -7,9 +7,10 @@
 
 .container {
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   padding: 20px;
-  background-image: url("./img/fond.jpg");
+  /* background-image: url("./img/fond.jpg"); */
+  background-color: #F9DDB9;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -77,16 +78,47 @@
   border-radius: 10px;
   color: crimson;
   opacity: 0;
-  transition: opacity .5s ease-in-out;
+  transition: opacity 0.5s ease-in-out;
 }
 .active {
   opacity: 1;
 }
 
+.hourlyMeteo {
+  width: 90%;
+  margin: 30px auto;
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
+.hourlyMeteo .hourly {
+  width: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 0.7);
+  align-items: center;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px lightgrey;
+}
+.hourlyMeteo .hourly .picto2 img {
+  width: 80%;
+}
+
+@media screen and (max-width: 875px) {
+  .hourlyMeteo {
+    width: 100%;
+    overflow-x: scroll;
+    justify-content: start;
+  }
+
+}
 @media screen and (max-width: 500px) {
   .container {
     max-height: 100svh;
   }
+  
 }
 
 @media screen and (max-height: 500px) {
