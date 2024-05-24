@@ -9,8 +9,8 @@
   width: 100%;
   min-height: 100vh;
   padding: 20px;
-  /* background-image: url("./img/fond.jpg"); */
-  background-color: #F9DDB9;
+  background-image: url("./img/fond.jpg");
+  /* background-color: #f9ddb9; */
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -88,41 +88,51 @@
   width: 90%;
   margin: 30px auto;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   gap: 5px;
   overflow-x: auto;
 }
-.hourlyMeteo::-webkit-scrollbar {
-  display: none;
-}
 .hourlyMeteo .hourly {
-  width: 60px;
+  width: 30%;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  background: rgba(255, 255, 255, 0.7);
+  justify-content: space-around;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
   align-items: center;
   padding: 10px;
   border-radius: 5px;
   box-shadow: 0 0 5px lightgrey;
+  margin: auto;
+}
+.hourlyMeteo .hourly .picto2 {
+  text-align: center;
+  height: 40px;
+  
 }
 .hourlyMeteo .hourly .picto2 img {
-  width: 80%;
+  width: 100%;
+  height: 100%;
 }
 
-@media screen and (max-width: 875px) {
-  .hourlyMeteo {
-    width: 100%;
-    /* overflow-x: scroll; */
-    justify-content: start;
-  }
-
-}
 @media screen and (max-width: 500px) {
   .container {
     max-height: 100svh;
   }
-  
+  .hourlyMeteo {
+    width: 100%;
+    flex-direction: row;
+    justify-content: start;
+  }
+  .hourlyMeteo::-webkit-scrollbar {
+    display: none;
+  }
+  .hourlyMeteo .hourly {
+    flex-direction: column;
+    min-width: 60px;
+    max-width: 60px;
+  }  
 }
 
 @media screen and (max-height: 500px) {

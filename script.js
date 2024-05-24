@@ -12,16 +12,16 @@ function degConvert(degres) {
 
 navigator.geolocation.getCurrentPosition(success, error);
 
-function success(e) {
+async function success(e) {
   const geolocationLatitude = e.coords.latitude;
   const geolocationLongitude = e.coords.longitude;
-  fetch(
+  await fetch(
     `https://api-adresse.data.gouv.fr/reverse/?lon=${geolocationLongitude}&lat=${geolocationLatitude}`
   )
     .then((reponse4) => reponse4.json())
     .then((data4) => {
       fetch(
-        `https://api.open-meteo.com/v1/meteofrance?latitude=${geolocationLatitude}&longitude=${geolocationLongitude}&current=temperature_2m,rain,precipitation,weather_code,wind_speed_10m,wind_direction_10m&daily=temperature_2m_min,temperature_2m_max&daily=weather_code,temperature_2m_max,temperature_2m_min&forecast_days=5&hourly=temperature_2m,weather_code&forecast_hours=12&timezone=Europe%2FBerlin`
+        `https://api.open-meteo.com/v1/meteofrance?latitude=${geolocationLatitude}&longitude=${geolocationLongitude}&current=temperature_2m,rain,precipitation,weather_code,wind_speed_10m,wind_direction_10m&daily=temperature_2m_min,temperature_2m_max&daily=weather_code,temperature_2m_max,temperature_2m_min&forecast_days=5&hourly=temperature_2m,weather_code&forecast_hours=13&timezone=Europe%2FBerlin`
       )
         .then((reponse3) => reponse3.json())
         .then((data3) => {
@@ -100,8 +100,8 @@ function success(e) {
             const dataObject = {
               heure: heure[i],
               weatherCode: weatherCode[i],
-              temperature: temperature[i],
-              picto2: "111",
+              temperature: temperature[i].toFixed(0),
+              picto2: "",
             };
 
             switch (dataObject.weatherCode) {
@@ -151,15 +151,20 @@ function success(e) {
 
             dataObjects.push(dataObject);
           }
-          hourlyMeteo.innerHTML = dataObjects.map(
-            (item) =>
-              `
+          dataObjects.shift();
+          hourlyMeteo.innerHTML = dataObjects
+            .map(
+              (item) =>
+                `
           <div class="hourly">
             <p class="heure">${item.heure.substr(11, 2)}h</p>
             <div class="picto2">${item.picto2}</div>
-            <p class="temp">${item.temperature}°C</p>
+            <p class="temp">${item.temperature}${
+                  data3.current_units.temperature_2m
+                }</p>
           </div>`
-          );
+            )
+            .join("");
         });
     });
 }
@@ -187,7 +192,7 @@ function getVille(e) {
           longitude = data.results[0].longitude;
 
           fetch(
-            `https://api.open-meteo.com/v1/meteofrance?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,rain,precipitation,weather_code,wind_speed_10m,wind_direction_10m&daily=temperature_2m_min,temperature_2m_max&daily=weather_code,temperature_2m_max,temperature_2m_min&forecast_days=5&hourly=temperature_2m,weather_code&forecast_hours=12&timezone=Europe%2FBerlin`
+            `https://api.open-meteo.com/v1/meteofrance?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,rain,precipitation,weather_code,wind_speed_10m,wind_direction_10m&daily=temperature_2m_min,temperature_2m_max&daily=weather_code,temperature_2m_max,temperature_2m_min&forecast_days=5&hourly=temperature_2m,weather_code&forecast_hours=13&timezone=Europe%2FBerlin`
           )
             .then((reponse2) => reponse2.json())
             .then((data2) => {
@@ -271,7 +276,7 @@ function getVille(e) {
                 const dataObject = {
                   heure: heure[i],
                   weatherCode: weatherCode[i],
-                  temperature: temperature[i],
+                  temperature: temperature[i].toFixed(0),
                   picto2: "",
                 };
                 switch (dataObject.weatherCode) {
@@ -321,15 +326,20 @@ function getVille(e) {
 
                 dataObjects.push(dataObject);
               }
-              hourlyMeteo.innerHTML = dataObjects.map(
-                (item) =>
-                  `
+              dataObjects.shift();
+              hourlyMeteo.innerHTML = dataObjects
+                .map(
+                  (item) =>
+                    `
               <div class="hourly">
                 <p class="heure">${item.heure.substr(11, 2)}h</p>
                 <div class="picto2">${item.picto2}</div>
-                <p class="temp">${item.temperature}°C</p>
+                <p class="temp">${item.temperature}${
+                      data2.current_units.temperature_2m
+                    }</p>
               </div>`
-              );
+                )
+                .join("");
             });
         }
       });
