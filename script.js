@@ -20,15 +20,16 @@ async function success(e) {
   )
     .then((reponse4) => reponse4.json())
     .then((data4) => {
+      console.log(data4);
       fetch(
-        `https://api.open-meteo.com/v1/meteofrance?latitude=${geolocationLatitude}&longitude=${geolocationLongitude}&current=temperature_2m,rain,precipitation,weather_code,wind_speed_10m,wind_direction_10m&daily=temperature_2m_min,temperature_2m_max&daily=weather_code,temperature_2m_max,temperature_2m_min&forecast_days=5&hourly=temperature_2m,weather_code&forecast_hours=13&timezone=Europe%2FBerlin`
+        `https://api.open-meteo.com/v1/meteofrance?latitude=${geolocationLatitude}&longitude=${geolocationLongitude}&current=temperature_2m,rain,precipitation,weather_code,wind_speed_10m,wind_direction_10m&daily=temperature_2m_min,temperature_2m_max&daily=weather_code,temperature_2m_max,temperature_2m_min&forecast_days=5&hourly=temperature_2m,weather_code&forecast_hours=24&timezone=Europe%2FBerlin`
       )
         .then((reponse3) => reponse3.json())
         .then((data3) => {
           const degresVent = data3.current.wind_direction_10m;
           const directionVent = degConvert(degresVent);
           infosMeteo.innerHTML = `
-            <h2>${data4.features[0].properties.city}</h2>
+            <h2>${data4.features[0].properties.city}, ${data4.features[0].properties.country}</h2>
             <h3 class="temperature">${data3.current.temperature_2m}${
             data3.current_units.temperature_2m
           }  <span>${Math.min(...data3.daily.temperature_2m_min)}${
