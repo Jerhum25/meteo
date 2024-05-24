@@ -193,7 +193,7 @@ function getVille(e) {
           longitude = data.results[0].longitude;
 
           fetch(
-            `https://api.open-meteo.com/v1/meteofrance?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,rain,precipitation,weather_code,wind_speed_10m,wind_direction_10m&daily=temperature_2m_min,temperature_2m_max&daily=weather_code,temperature_2m_max,temperature_2m_min&forecast_days=5&hourly=temperature_2m,weather_code&forecast_hours=13&timezone=Europe%2FBerlin`
+            `https://api.open-meteo.com/v1/meteofrance?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,rain,precipitation,weather_code,wind_speed_10m,wind_direction_10m&daily=temperature_2m_min,temperature_2m_max&daily=weather_code,temperature_2m_max,temperature_2m_min&forecast_days=5&hourly=temperature_2m,weather_code&forecast_hours=25&timezone=Europe%2FBerlin`
           )
             .then((reponse2) => reponse2.json())
             .then((data2) => {
