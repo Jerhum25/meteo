@@ -29,7 +29,7 @@ async function success(e) {
           const degresVent = data3.current.wind_direction_10m;
           const directionVent = degConvert(degresVent);
           infosMeteo.innerHTML = `
-            <h2>${data4.features[0].properties.city}, ${data4.features[0].properties.country}</h2>
+            <h2>${data4.features[0].properties.city}</h2>
             <h3 class="temperature">${data3.current.temperature_2m}${
             data3.current_units.temperature_2m
           }  <span>${Math.min(...data3.daily.temperature_2m_min)}${
